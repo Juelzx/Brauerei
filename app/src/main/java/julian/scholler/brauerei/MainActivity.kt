@@ -19,9 +19,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BrauereiTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                }
             }
         }
     }
