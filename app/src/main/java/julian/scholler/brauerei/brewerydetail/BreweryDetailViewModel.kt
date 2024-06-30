@@ -1,4 +1,6 @@
 package julian.scholler.brauerei.brewerydetail
 
-class BreweryDetailViewModel {
+import androidx.lifecycle.ViewModel
+
+class BreweryDetailViewModel: ViewModel() {
 }
