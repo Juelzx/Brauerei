@@ -15,9 +15,10 @@ lifecycleViewModelComposeVersion = "2.8.2"
 navigationComposeVersion = "2.7.7"
 accompanistFlowlayoutVersion = "0.30.1"
 coroutinesVersion = "1.9.0-RC"
-hiltVersion = "2.51"
+hiltVersion = "2.48"
 retrofitVersion = "2.9.0"
 okhttpVersion = "5.0.0-alpha.2"
+roomVersion = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,8 +49,9 @@ retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = 
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
-androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifeCycleVersion" }
-androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifeCycleVersion" }
+roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomVersion" }
+roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "roomVersion" }
+roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "roomVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
