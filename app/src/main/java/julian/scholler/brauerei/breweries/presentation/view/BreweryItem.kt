@@ -18,7 +18,6 @@ import julian.scholler.brauerei.data.remote.model.Brewery
 
 @Composable
 fun BreweryItem(
-    modifier: Modifier = Modifier,
     brewery: Brewery
 ) {
     Column(
@@ -38,10 +37,10 @@ fun BreweryItem(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = brewery.breweryCountry, style = MaterialTheme.typography.titleLarge)
+        Text(text = brewery.breweryName, style = MaterialTheme.typography.titleLarge)
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = brewery.breweryCountry, style = MaterialTheme.typography.titleMedium)
+        Text(text = brewery.breweryCity, style = MaterialTheme.typography.titleMedium)
     }
 }

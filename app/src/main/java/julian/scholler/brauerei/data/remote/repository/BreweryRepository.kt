@@ -1,35 +1,39 @@
 package julian.scholler.brauerei.data.remote.repository
 
+import julian.scholler.brauerei.data.Result
 import julian.scholler.brauerei.data.remote.api.BreweryService
 import julian.scholler.brauerei.data.remote.model.Brewery
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import timber.log.Timber
 import javax.inject.Inject
 
 class BreweryRepository @Inject constructor(private val service: BreweryService) {
 
-    suspend fun getBreweries(): Flow<List<Brewery>> {
+    suspend fun getBreweries(): Flow<Result<List<Brewery>>> {
         return flow {
+            emit(Result.Loading)
             try {
                 val breweries = service.getBreweries()
-                emit(breweries)
+                Timber.d("breweries $breweries")
+                emit(Result.Success(breweries))
             } catch (e: Exception) {
-                emit(emptyList())
+                emit(Result.Error(e))
+                Timber.e(e)
             }
-        }.flowOn(Dispatchers.IO)
+        }
     }
 
-    suspend fun getRandomBrewery(): Flow<Brewery> {
-        return flow<Brewery> {
+    suspend fun getRandomBrewery(): Flow<Result<Brewery>> {
+        return flow {
+            emit(Result.Loading)
             try {
-                val brewery = service.getRandomBrewery()
-                // implement logic to avoid duplicates within 30 days
+                val randomBrewery = service.getRandomBrewery()
+                emit(Result.Success(randomBrewery))
             } catch (e: Exception) {
-                Timber.e("$e getRandomBrewery() no brewery available")
+                emit(Result.Error(e))
+                Timber.e(e)
             }
-        }.flowOn(Dispatchers.IO)
+        }
     }
 }

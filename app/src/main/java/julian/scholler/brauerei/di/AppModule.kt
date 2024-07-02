@@ -1,11 +1,16 @@
 package julian.scholler.brauerei.di
 
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import julian.scholler.brauerei.data.local.database.AppDatabase
+import julian.scholler.brauerei.data.local.database.dao.ShownBreweryDao
 import julian.scholler.brauerei.data.remote.api.BreweryService
 import julian.scholler.brauerei.data.remote.repository.BreweryRepository
 import okhttp3.OkHttpClient
@@ -38,7 +43,7 @@ object AppModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://akabab.github.io/starwars-api/api/")
+            .baseUrl("https://api.openbrewerydb.org/v1/")
             .build()
     }
 
@@ -52,5 +57,20 @@ object AppModule {
     @Provides
     fun provideStarWarsRepository(breweryService: BreweryService): BreweryRepository {
         return BreweryRepository(breweryService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "breweries_database"
+        ).build()
+    }
+
+    @Provides
+    fun provideShownBreweryDao(database: AppDatabase): ShownBreweryDao {
+        return database.shownBreweryDao()
     }
 }

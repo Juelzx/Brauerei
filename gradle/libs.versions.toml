@@ -9,16 +9,16 @@ lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
 composeBom = "2024.06.00"
 coilVersion = "2.6.0"
-lifeCycleVersion = "2.8.2"
 timberVersion = "5.0.1"
 lifecycleViewModelComposeVersion = "2.8.2"
 navigationComposeVersion = "2.7.7"
 accompanistFlowlayoutVersion = "0.30.1"
 coroutinesVersion = "1.9.0-RC"
-hiltVersion = "2.48"
+hiltVersion = "2.51"
 retrofitVersion = "2.9.0"
 okhttpVersion = "5.0.0-alpha.2"
 roomVersion = "2.6.1"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

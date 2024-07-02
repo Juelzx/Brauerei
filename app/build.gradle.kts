@@ -30,9 +30,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-        debug {
-
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -43,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
@@ -90,9 +88,12 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.accompanist.flowlayout)
 
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    // Hilt -> convert to version catalog
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-android-compiler:2.51")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.51")
+
 
     // Retrofit and OkHttp
     implementation(libs.retrofit)
