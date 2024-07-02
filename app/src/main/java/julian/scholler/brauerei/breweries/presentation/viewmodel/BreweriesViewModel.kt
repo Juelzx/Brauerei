@@ -8,6 +8,7 @@ import julian.scholler.brauerei.data.remote.model.Brewery
 import julian.scholler.brauerei.data.remote.repository.BreweryRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,7 +19,11 @@ class BreweriesViewModel @Inject constructor(private val repository: BreweryRepo
     private val _breweries = MutableStateFlow<Result<List<Brewery>>>(Result.Loading)
     val breweries: StateFlow<Result<List<Brewery>>> = _breweries
 
+    private val _dailyBrewery = MutableStateFlow<Result<Brewery>>(Result.Loading)
+    val dailyBrewery: StateFlow<Result<Brewery>> = _dailyBrewery.asStateFlow()
+
     init {
+        fetchDailyBrewery()
         fetchBreweries()
     }
 
@@ -27,6 +32,14 @@ class BreweriesViewModel @Inject constructor(private val repository: BreweryRepo
         viewModelScope.launch {
             repository.getBreweries().collect { result ->
                 _breweries.value = result
+            }
+        }
+    }
+
+    private fun fetchDailyBrewery() {
+        viewModelScope.launch {
+            repository.getRandomBrewery().collect {
+                _dailyBrewery.value = Result.Success(it)
             }
         }
     }

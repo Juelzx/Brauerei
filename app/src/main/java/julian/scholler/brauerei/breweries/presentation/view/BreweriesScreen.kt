@@ -3,6 +3,7 @@ package julian.scholler.brauerei.breweries.presentation.view
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
@@ -21,26 +22,55 @@ import julian.scholler.brauerei.data.remote.model.Brewery
 fun BreweriesScreen(
     navController: NavController
 ) {
-    val viewModel: BreweriesViewModel = hiltViewModel()
-    val breweriesState by viewModel.breweries.collectAsState()
+    val breweriesViewModel: BreweriesViewModel = hiltViewModel()
+    val breweriesDailyState by breweriesViewModel.dailyBrewery.collectAsState()
+    val breweriesState by breweriesViewModel.breweries.collectAsState()
 
-    when (breweriesState) {
-        is Result.Loading -> {
-            Text(text = "Loading...")
+    LazyColumn(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    ) {
+        item {
+            Text(text = "Today we present you the following brewery:")
+            when (breweriesDailyState) {
+                is Result.Loading -> {
+                    Text(text = "Loading daily brewery...")
+                }
+
+                is Result.Success -> {
+                    val dailyBrewery = (breweriesDailyState as Result.Success<Brewery>).data
+                    dailyBrewery.breweryName += " (DAILY)"
+                    BreweryItem(brewery = dailyBrewery)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+
+                is Result.Error -> {
+                    Text(text = "An error occurred: ${(breweriesDailyState as Result.Error).exception.message}")
+                }
+            }
         }
 
-        is Result.Success -> {
-            val breweries = (breweriesState as Result.Success<List<Brewery>>).data
-            LazyColumn(Modifier.fillMaxWidth()) {
+        when (breweriesState) {
+            is Result.Loading -> {
+                item {
+                    Text(text = "Loading breweries...")
+                }
+            }
+
+            is Result.Success -> {
+                val breweries = (breweriesState as Result.Success<List<Brewery>>).data
                 items(breweries) { brewery ->
                     BreweryItem(brewery = brewery)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
             }
-        }
 
-        is Result.Error -> {
-            Text(text = "An error occurred: ${(breweriesState as Result.Error).exception.message}")
+            is Result.Error -> {
+                item {
+                    Text(text = "An error occurred: ${(breweriesState as Result.Error).exception.message}")
+                }
+            }
         }
     }
 }

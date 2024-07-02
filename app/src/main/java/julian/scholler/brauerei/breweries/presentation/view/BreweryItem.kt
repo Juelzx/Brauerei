@@ -41,6 +41,7 @@ fun BreweryItem(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        Text(text = brewery.breweryCity, style = MaterialTheme.typography.titleMedium)
+        Text(text = "${brewery.breweryCity}, ${brewery.breweryAddress}", style = MaterialTheme.typography.titleMedium)
+
     }
 }

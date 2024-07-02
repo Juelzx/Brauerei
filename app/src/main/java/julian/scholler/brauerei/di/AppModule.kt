@@ -55,8 +55,11 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideStarWarsRepository(breweryService: BreweryService): BreweryRepository {
-        return BreweryRepository(breweryService)
+    fun provideBreweryRepository(
+        breweryService: BreweryService,
+        shownBreweryDao: ShownBreweryDao
+    ): BreweryRepository {
+        return BreweryRepository(breweryService, shownBreweryDao)
     }
 
     @Provides

@@ -8,7 +8,6 @@ interface BreweryService {
     @GET("breweries")
     suspend fun getBreweries(): List<Brewery>
 
-    @GET("random")
-    suspend fun getRandomBrewery(): Brewery
-
+    @GET("breweries/random")
+    suspend fun getRandomBrewery(): List<Brewery>
 }
