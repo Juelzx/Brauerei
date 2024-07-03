@@ -2,7 +2,6 @@
 agp = "8.4.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
-junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.2"
@@ -18,11 +17,24 @@ hiltVersion = "2.51"
 retrofitVersion = "2.9.0"
 okhttpVersion = "5.0.0-alpha.2"
 roomVersion = "2.6.1"
+junit = "4.13.2"
+androidXTest = "1.6.1"
+mockito = "4.2.0"
+mockitoKotlin = "3.2.0"
+mockk = "1.12.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidXTestCore = { module = "androidx.test:core", version.ref = "androidXTest" }
+mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+mockitoAndroid = { module = "org.mockito:mockito-android", version.ref = "mockito" }
+mockitoInline = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
+mockitoKotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockitoKotlin" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+dexmakerMockitoInline = { module = "com.linkedin.dexmaker:dexmaker-mockito-inline", version = "2.28.1" }
+androidXJunit = { module = "androidx.test.ext:junit", version = "1.2.1" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }

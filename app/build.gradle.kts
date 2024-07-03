@@ -105,4 +105,17 @@ dependencies {
     implementation(libs.roomRuntime)
     implementation(libs.roomKtx)
     kapt(libs.roomCompiler)
+
+    // Testing
+    testImplementation(kotlin("test"))
+    testImplementation(libs.junit)
+    testImplementation(libs.androidXTestCore)
+    testImplementation(libs.mockitoCore)
+    testImplementation(libs.mockitoAndroid)
+    testImplementation(libs.mockitoInline)
+    testImplementation(libs.mockitoKotlin)
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.androidXJunit)
+    androidTestImplementation(libs.dexmakerMockitoInline)
+
 }
