@@ -26,13 +26,12 @@ fun BreweriesScreen(
 
     val breweriesDailyState by breweriesViewModel.dailyBrewery.collectAsState()
     val breweriesState by breweriesViewModel.breweries.collectAsState()
-
-    var searchQuery by remember { mutableStateOf("") }
+    val searchQuery by breweriesViewModel.searchQuery.collectAsState()
 
     Column(modifier = Modifier.padding(16.dp)) {
         OutlinedTextField(
             value = searchQuery,
-            onValueChange = { searchQuery = it },
+            onValueChange = { breweriesViewModel.updateSearchQuery(it) },
             label = { Text("Search breweries") },
             modifier = Modifier
                 .fillMaxWidth()

@@ -22,6 +22,9 @@ class BreweriesViewModel @Inject constructor(private val repository: BreweryRepo
     private val _dailyBrewery = MutableStateFlow<Result<Brewery>>(Result.Loading)
     val dailyBrewery: StateFlow<Result<Brewery>> = _dailyBrewery.asStateFlow()
 
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
     init {
         fetchDailyBrewery()
         fetchBreweries()
@@ -42,5 +45,9 @@ class BreweriesViewModel @Inject constructor(private val repository: BreweryRepo
                 _dailyBrewery.value = Result.Success(it)
             }
         }
+    }
+
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
     }
 }
