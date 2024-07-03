@@ -1,10 +1,10 @@
 package julian.scholler.brauerei.navigation
 
+import BreweriesScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import julian.scholler.brauerei.breweries.presentation.view.BreweriesScreen
 
 @Composable
 fun AppNavigationGraph(startDestination: String = Routes.BREWERIES) {
